@@ -1,0 +1,70 @@
+# config/config.yaml
+
+# AQI Data Collection Settings
+aqi:
+  source: "openweather"  # Options: openweather, iqair
+  location: "Bangalore"
+  check_interval: 3600  # Check every hour (in seconds)
+
+# Alert Configuration
+alerts:
+  enabled: true
+  # Minimum hours between alerts to same subscriber
+  cooldown_hours: 6
+
+  thresholds:
+    - level: 101
+      category: "Unhealthy for Sensitive Groups"
+      message: "AQI is moderate. Sensitive groups should consider reducing prolonged outdoor activities."
+
+    - level: 151
+      category: "Unhealthy"
+      message: "AQI is unhealthy. Everyone should limit prolonged outdoor exposure."
+
+    - level: 201
+      category: "Very Unhealthy"
+      message: "AQI is very unhealthy. Avoid outdoor activities and keep windows closed."
+
+    - level: 301
+      category: "Hazardous"
+      message: "AQI is hazardous! Stay indoors and use air purifiers if available."
+
+# Email Notification Settings
+notifications:
+  email:
+    enabled: true
+    smtp_server: "smtp.gmail.com"
+    smtp_port: 587
+    from_email: "aqi.alerts.bangalore@gmail.com"
+    from_name: "Bangalore AQI Alerts"
+
+  telegram:
+    enabled: false
+    # Set your bot token and chat ID in .env file
+
+# Database Configuration
+database:
+  type: "sqlite"
+  url: "sqlite:///data/aqi_data.db"
+  # For PostgreSQL: "postgresql://user:password@localhost/aqi_db"
+
+# Report Generation Settings
+reports:
+  enabled: true
+  frequency: "daily"  # Options: daily, weekly
+  time: "08:00"  # Time to send report (24-hour format)
+  include_graphs: true
+  days_to_include: 7  # Number of days of data to include
+
+# Logging Configuration
+logging:
+  level: "INFO"  # Options: DEBUG, INFO, WARNING, ERROR
+  file: "logs/aqi_engine.log"
+  max_bytes: 10485760  # 10MB
+  backup_count: 5
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+# General Settings
+general:
+  timezone: "Asia/Kolkata"
+  data_retention_days: 90  # Keep data for 90 days
