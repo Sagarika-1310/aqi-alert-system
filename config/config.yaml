@@ -2,8 +2,12 @@
 
 # AQI Data Collection Settings
 aqi:
-  source: "openweather"  # Options: openweather, iqair
-  location: "Bangalore"
+  source:
+    openweather:
+      url: "http://api.openweathermap.org/data/2.5/air_pollution"
+      location: [
+        { latitude: 12.9716, longitude: 77.5946 } # Default co-ordinates of Bangalore
+      ]
   check_interval: 3600  # Check every hour (in seconds)
 
 # Alert Configuration
@@ -35,8 +39,8 @@ notifications:
     enabled: true
     smtp_server: "smtp.gmail.com"
     smtp_port: 587
-    from_email: "aqi.alerts.bangalore@gmail.com"
-    from_name: "Bangalore AQI Alerts"
+    from_email: "saga13.notify@gmail.com"
+    from_name: "AQI Alerts"
 
   telegram:
     enabled: false

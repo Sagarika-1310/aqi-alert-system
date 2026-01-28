@@ -100,3 +100,35 @@ def create_data_directories():
     directories = ['data', 'logs', 'config']
     for directory in directories:
         Path(directory).mkdir(parents=True, exist_ok=True)
+
+
+def get_aqi_category(aqi: int) -> str:
+    """Get AQI category from value"""
+    if aqi <= 50:
+        return "Good"
+    elif aqi <= 100:
+        return "Moderate"
+    elif aqi <= 150:
+        return "Unhealthy for Sensitive Groups"
+    elif aqi <= 200:
+        return "Unhealthy"
+    elif aqi <= 300:
+        return "Very Unhealthy"
+    else:
+        return "Hazardous"
+
+
+def get_aqi_color(aqi: int) -> str:
+    """Get color code for AQI value"""
+    if aqi <= 50:
+        return "Green"
+    elif aqi <= 100:
+        return "Yellow"
+    elif aqi <= 150:
+        return "Orange"
+    elif aqi <= 200:
+        return "Red"
+    elif aqi <= 300:
+        return "Purple"
+    else:
+        return "Maroon"
